@@ -34,7 +34,7 @@ dependencies {
     implementation "androidx.camera:camera-lifecycle:${cfgs.camerax_version}"
     implementation "androidx.localbroadcastmanager:localbroadcastmanager:${cfgs.localbroadcastmanager}"
     implementation project(':camera-view')
-    api project(':ucrop')
+    implementation project(':ucrop')
 }
 
 
