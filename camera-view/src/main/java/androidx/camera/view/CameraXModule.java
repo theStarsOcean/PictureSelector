@@ -241,21 +241,11 @@ final class CameraXModule {
         mVideoCaptureConfigBuilder.setTargetRotation(getDisplaySurfaceRotation());
         //mVideoCaptureConfigBuilder.setTargetAspectRatio();
 
-//        if(getMeasuredWidth() > 720){
-//
-//        }
 
         int height = (int) (720 / targetAspectRatio.floatValue());
         mVideoCaptureConfigBuilder.setTargetResolution(new Size(720, height));
-        mVideoCaptureConfigBuilder.setBitRate(720*height);
+        mVideoCaptureConfigBuilder.setBitRate(720*height*2);
 
-//        if(height > 1500 || getMeasuredWidth() > 1500){
-//            mVideoCaptureConfigBuilder.setTargetResolution(new Size(720, height));
-//            mVideoCaptureConfigBuilder.setBitRate(720*height);
-//        }else{
-//            mVideoCaptureConfigBuilder.setTargetResolution(new Size(getMeasuredWidth(), height));
-//            mVideoCaptureConfigBuilder.setBitRate(getMeasuredWidth()*height*2);
-//        }
 
         //mVideoCaptureConfigBuilder.setBitRate(getMeasuredWidth()*height*5);
         //mVideoCaptureConfigBuilder.setVideoFrameRate(30);
@@ -265,23 +255,17 @@ final class CameraXModule {
 //        mVideoCaptureConfigBuilder.setAudioBitRate(getDisplaySurfaceRotation());
         // mVideoCaptureConfigBuilder.setTargetResolution(new Size(640, 480));
 
-        //VideoCaptureConfig config = mVideoCaptureConfigBuilder.getUseCaseConfig();
-        //Log.d("mVideoCapture getVideoFrameRate",String.valueOf(config.setVideoEncodingBitRate()));
-        //Log.d("mVideoCapture getTargetRotation",String.valueOf(config.getTargetRotation()));
-        //Log.d("mVideoCapture getVideoFrameRate",String.valueOf(config.getVideoFrameRate()));
-//        Log.d("mVideoCapture getBitRate",String.valueOf(config.getBitRate()));
-//        Log.d("mVideoCapture getIFrameInterval",String.valueOf(config.getIFrameInterval()));
 
         mVideoCapture = mVideoCaptureConfigBuilder.build();
 
         // Adjusts the preview resolution according to the view size and the target aspect ratio.
-        height = (int) (getMeasuredWidth() / targetAspectRatio.floatValue());
+        //height = (int) (getMeasuredWidth() / targetAspectRatio.floatValue());
 
-        mPreviewBuilder.setTargetResolution(new Size(getMeasuredWidth(), height));
+        mPreviewBuilder.setTargetResolution(new Size(720, height));
 
         //TODO: [SOUP] START
         mImageAnalysisBuilder.setTargetAspectRatioCustom(targetAspectRatio);
-        mImageAnalysisBuilder.setTargetResolution(new Size(getMeasuredWidth(), height));
+        mImageAnalysisBuilder.setTargetResolution(new Size(720, height));
         mImageAnalysisBuilder.setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST);
         mImageAnalysisBuilder.setTargetRotation(getDisplaySurfaceRotation());
 
@@ -300,13 +284,6 @@ final class CameraXModule {
 
         mPreview = mPreviewBuilder.build();
         mPreview.setSurfaceProvider(mCameraView.getPreviewView().createSurfaceProvider(null));
-
-//        mPreview.setOnPreviewOutputUpdateListener(new Preview.OnPreviewOutputUpdateListener() {
-//            @Override
-//            public void onUpdated(Preview.PreviewOutput output) {
-//                cameraBinding.viewFinder.setSurfaceTexture(output.getSurfaceTexture());
-//            }
-//        });
 
         CameraSelector cameraSelector =
                 new CameraSelector.Builder().requireLensFacing(mCameraLensFacing).build();
