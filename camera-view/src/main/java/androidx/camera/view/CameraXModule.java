@@ -241,11 +241,13 @@ final class CameraXModule {
         mVideoCaptureConfigBuilder.setTargetRotation(getDisplaySurfaceRotation());
         //mVideoCaptureConfigBuilder.setTargetAspectRatio();
 
-        if(getMeasuredWidth() > 720){
-            int height = (int) (720 / targetAspectRatio.floatValue());
-            mVideoCaptureConfigBuilder.setTargetResolution(new Size(720, height));
-            mVideoCaptureConfigBuilder.setBitRate(720*height);
-        }
+//        if(getMeasuredWidth() > 720){
+//
+//        }
+
+        int height = (int) (720 / targetAspectRatio.floatValue());
+        mVideoCaptureConfigBuilder.setTargetResolution(new Size(720, height));
+        mVideoCaptureConfigBuilder.setBitRate(720*height);
 
 //        if(height > 1500 || getMeasuredWidth() > 1500){
 //            mVideoCaptureConfigBuilder.setTargetResolution(new Size(720, height));
@@ -273,7 +275,7 @@ final class CameraXModule {
         mVideoCapture = mVideoCaptureConfigBuilder.build();
 
         // Adjusts the preview resolution according to the view size and the target aspect ratio.
-        int height = (int) (getMeasuredWidth() / targetAspectRatio.floatValue());
+        height = (int) (getMeasuredWidth() / targetAspectRatio.floatValue());
 
         mPreviewBuilder.setTargetResolution(new Size(getMeasuredWidth(), height));
 
