@@ -917,6 +917,7 @@ public class PictureSelectorActivity extends PictureBaseActivity implements View
                     cutInfo.setMimeType(media.getMimeType());
                     cutInfo.setDuration(media.getDuration());
                     cutInfo.setRealPath(media.getRealPath());
+
                     cuts.add(cutInfo);
                 }
                 if (imageNum <= 0) {

@@ -241,15 +241,19 @@ final class CameraXModule {
         mVideoCaptureConfigBuilder.setTargetRotation(getDisplaySurfaceRotation());
         //mVideoCaptureConfigBuilder.setTargetAspectRatio();
 
-        int height = (int) (getMeasuredWidth() / targetAspectRatio.floatValue());
-
-        if(height > 1500 || getMeasuredWidth() > 1500){
-            mVideoCaptureConfigBuilder.setTargetResolution(new Size(getMeasuredWidth()/2, height/2));
-            mVideoCaptureConfigBuilder.setBitRate(getMeasuredWidth()*height/2);
-        }else{
-            mVideoCaptureConfigBuilder.setTargetResolution(new Size(getMeasuredWidth(), height));
-            mVideoCaptureConfigBuilder.setBitRate(getMeasuredWidth()*height*2);
+        if(getMeasuredWidth() > 720){
+            int height = (int) (720 / targetAspectRatio.floatValue());
+            mVideoCaptureConfigBuilder.setTargetResolution(new Size(720, height));
+            mVideoCaptureConfigBuilder.setBitRate(720*height);
         }
+
+//        if(height > 1500 || getMeasuredWidth() > 1500){
+//            mVideoCaptureConfigBuilder.setTargetResolution(new Size(720, height));
+//            mVideoCaptureConfigBuilder.setBitRate(720*height);
+//        }else{
+//            mVideoCaptureConfigBuilder.setTargetResolution(new Size(getMeasuredWidth(), height));
+//            mVideoCaptureConfigBuilder.setBitRate(getMeasuredWidth()*height*2);
+//        }
 
         //mVideoCaptureConfigBuilder.setBitRate(getMeasuredWidth()*height*5);
         //mVideoCaptureConfigBuilder.setVideoFrameRate(30);
@@ -269,6 +273,7 @@ final class CameraXModule {
         mVideoCapture = mVideoCaptureConfigBuilder.build();
 
         // Adjusts the preview resolution according to the view size and the target aspect ratio.
+        int height = (int) (getMeasuredWidth() / targetAspectRatio.floatValue());
 
         mPreviewBuilder.setTargetResolution(new Size(getMeasuredWidth(), height));
 
@@ -278,11 +283,11 @@ final class CameraXModule {
         mImageAnalysisBuilder.setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST);
         mImageAnalysisBuilder.setTargetRotation(getDisplaySurfaceRotation());
 
-        Log.d("mVideoCapture targetAspectRatio",String.valueOf(targetAspectRatio));
-        Log.d("mVideoCapture measure width",String.valueOf(getMeasuredWidth()));
-        Log.d("mVideoCapture measure height",String.valueOf(getMeasuredHeight()));
-        Log.d("mVideoCapture width",String.valueOf(getWidth()));
-        Log.d("mVideoCapture height",String.valueOf(getHeight()));
+//        Log.d("mVideoCapture targetAspectRatio",String.valueOf(targetAspectRatio));
+//        Log.d("mVideoCapture measure width",String.valueOf(getMeasuredWidth()));
+//        Log.d("mVideoCapture measure height",String.valueOf(getMeasuredHeight()));
+//        Log.d("mVideoCapture width",String.valueOf(getWidth()));
+//        Log.d("mVideoCapture height",String.valueOf(getHeight()));
 //        Log.d("mVideoCapture height",String.valueOf(height));
 //        Log.d("mVideoCapture targetAspectRatio",String.valueOf(targetAspectRatio));
 //        Log.d("mVideoCapture targetAspectRatio",String.valueOf(targetAspectRatio));
